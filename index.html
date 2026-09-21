@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <meta name="description" content="LIEN turns your speech into live subtitles and translates them in real time, right in your browser.">
+  <title>LIEN – Real-time multilingual subtitles</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%236d8cff'/%3E%3Cpath d='M20 16v32h24' fill='none' stroke='white' stroke-width='7' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app">
+
+    <!-- ===== Header ===== -->
+    <header class="hero">
+      <h1 class="hero__title">LIEN</h1>
+      <p class="hero__product">Real-time multilingual subtitles</p>
+      <p class="hero__tagline">Speak naturally. See translated subtitles instantly.</p>
+    </header>
+
+    <main>
+
+      <!-- ===== Controls ===== -->
+      <section class="card controls" aria-labelledby="controls-heading">
+        <h2 id="controls-heading" class="visually-hidden">Translation settings</h2>
+
+        <div class="controls__languages">
+          <div class="field">
+            <label for="sourceLang">I speak</label>
+            <select id="sourceLang"></select>
+          </div>
+
+          <button id="swapBtn" class="btn btn--icon" type="button" aria-label="Swap spoken and translation languages" title="Swap languages">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M7 4 3 8l4 4"/><path d="M3 8h14"/><path d="m17 20 4-4-4-4"/><path d="M21 16H7"/>
+            </svg>
+          </button>
+
+          <div class="field">
+            <label for="targetLang">Translate to</label>
+            <select id="targetLang"></select>
+          </div>
+        </div>
+
+        <div class="controls__actions">
+          <button id="startBtn" class="btn btn--primary" type="button">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="9" y="2" width="6" height="12" rx="3"/><path d="M5 11a7 7 0 0 0 14 0"/><path d="M12 18v4"/>
+            </svg>
+            <span id="startBtnLabel">Start Translating</span>
+          </button>
+
+          <button id="clearBtn" class="btn btn--secondary" type="button">Clear session</button>
+
+          <div id="statusPill" class="status" data-state="idle" role="status" aria-live="polite">
+            <span class="status__dot" aria-hidden="true"></span>
+            <span id="statusText">Microphone off</span>
+          </div>
+        </div>
+
+        <!-- Error and info messages appear here -->
+        <p id="message" class="message" aria-live="polite" hidden></p>
+      </section>
+
+      <!-- ===== Live subtitle panels ===== -->
+      <section class="panels" aria-label="Live subtitles">
+        <article class="panel">
+          <h2 class="panel__label">Original speech</h2>
+          <p id="originalText" class="panel__text is-placeholder">Your words will appear here as you speak.</p>
+        </article>
+
+        <article class="panel panel--translated">
+          <h2 class="panel__label">Translated subtitle</h2>
+          <p id="translatedText" class="panel__text is-placeholder" aria-live="polite">The translation will appear here.</p>
+        </article>
+      </section>
+
+      <!-- ===== Session history ===== -->
+      <section class="card history" aria-labelledby="history-heading">
+        <div class="history__header">
+          <div>
+            <h2 id="history-heading" class="history__title">Session history</h2>
+            <p id="historyCount" class="history__count">0 subtitles</p>
+          </div>
+          <button id="downloadBtn" class="btn btn--secondary" type="button" disabled>Download .txt</button>
+        </div>
+
+        <p id="historyEmpty" class="history__empty">Finished subtitles are saved here until you clear the session or close the page.</p>
+        <ol id="historyList" class="history__list"></ol>
+      </section>
+
+    </main>
+
+    <footer class="footer">
+      <p>Speech recognition runs in your browser (best in Chrome or Edge). Translations come from the free MyMemory API.</p>
+    </footer>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

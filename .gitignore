@@ -1,0 +1,20 @@
+# Operating system files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor and IDE settings
+.vscode/
+.idea/
+*.swp
+
+# Logs and temporary files
+*.log
+*.tmp
+
+# Environment files (never commit secrets)
+.env
+.env.*
+
+# Dependencies (not used in this project, but safe to ignore)
+node_modules/
