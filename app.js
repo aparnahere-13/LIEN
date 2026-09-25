@@ -25,7 +25,7 @@ const LANGUAGES = [
 
 const TRANSLATE_URL = 'https://api.mymemory.translated.net/get';
 const MAX_CHUNK_LENGTH = 450;      // MyMemory accepts about 500 characters per request
-const REQUEST_TIMEOUT_MS = 10000;  // give up on a translation after 10 seconds
+const REQUEST_TIMEOUT_MS = 30000;  // give up on a translation after 10 seconds
 
 /* ---------------------------------------------------------
    2. Grab elements from the page (every ID exists in index.html)
@@ -182,11 +182,11 @@ async function fetchTranslation(text, sourceCode, targetCode) {
     '&langpair=' + encodeURIComponent(sourceCode + '|' + targetCode);
 
   // AbortController lets us cancel the request if it takes too long
-  const controller = new AbortController();
-  const timeoutId = setTimeout(() => controller.abort(), REQUEST_TIMEOUT_MS);
+  // const controller = new AbortController();
+  // const timeoutId = setTimeout(() => controller.abort(), REQUEST_TIMEOUT_MS);
 
   try {
-    const response = await fetch(url, { signal: controller.signal });
+    const response = await fetch(url);
     if (!response.ok) {
       throw new Error('The translation service is having problems (error ' + response.status + '). Please try again.');
     }
@@ -215,9 +215,9 @@ async function fetchTranslation(text, sourceCode, targetCode) {
       throw new Error('Could not reach the translation service. Check your internet connection.');
     }
     throw error;
-  } finally {
-    clearTimeout(timeoutId);
-  }
+  }// finally {
+    // clearTimeout(timeoutId);
+  //}
 }
 
 // Translate a full sentence (handles same-language and long text)
